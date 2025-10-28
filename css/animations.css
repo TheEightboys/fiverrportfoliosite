@@ -1,0 +1,249 @@
+/* New styles for article descriptions and buttons */
+.card-desc {
+  margin: 8px 0 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(6px);
+  animation: fadeSlideUp 0.5s ease forwards;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeSlideUp 0.5s ease 0.2s forwards;
+}
+
+.card-actions .btn {
+  font-size: 13px;
+  padding: 6px 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-actions .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(107,255,207,0.15);
+}
+
+.card-actions .btn.small {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.card-actions .btn.ghost:hover {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* Animation for description and buttons */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced image preview animations */
+.media-modal[data-open="true"] {
+  animation: modalBackdropReveal 0.3s ease forwards;
+}
+
+.media-modal[data-open="true"] .media-modal-shell {
+  animation: modalContentReveal 0.4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+.media-modal-content img {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: imageReveal 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+@keyframes modalBackdropReveal {
+  from {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+  }
+}
+
+@keyframes modalContentReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes imageReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Enhanced close button animation */
+.media-modal-close {
+  transform: scale(0.8);
+  opacity: 0;
+  animation: closeButtonPop 0.3s cubic-bezier(0.2, 0.9, 0.3, 1) 0.2s forwards;
+}
+
+@keyframes closeButtonPop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Clickable image indicator */
+.card-media {
+  position: relative;
+  cursor: zoom-in;
+}
+
+.card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, 
+    rgba(255,255,255,0.1) 0%,
+    rgba(255,255,255,0.05) 35%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card-media:hover::after {
+  opacity: 1;
+}
+
+/* Enhanced iframe preview animation */
+.media-modal-content iframe {
+  width: 100%;
+  height: 80vh;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(2,6,12,0.6);
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  animation: iframeReveal 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes iframeReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hover effect refinements */
+.card:hover .card-actions .btn {
+  transform: translateY(-1px);
+}
+
+.card:hover .card-desc {
+  color: var(--text);
+}
+
+/* Enhanced button interactions */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, 
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.1) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn:hover::after {
+  transform: translateX(100%);
+}
+
+/* Smooth description reveal on card hover */
+.card-desc {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Enhanced iframe loading state */
+.media-modal[data-loading="true"] .media-modal-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.05) 50%,
+    transparent 100%
+  );
+  animation: loading 1.5s ease infinite;
+}
+
+@keyframes loading {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* Refined card reveal animation */
+.card {
+  animation: cardReveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 0.1s);
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Smooth button state transitions */
+.btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JDM — Portfolio</title>
+
+  <!-- Hulu-like font (use Poppins as a close web-safe substitute) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo-badge">
+          <img src="assets/RenderedImage.jpg" alt="James Dillon Minto — JDM" />
+        </div>
+        <div class="brand-text">
+          <h1>James Dillon Minto</h1>
+          <p class="subtitle">creative • coder • athlete</p>
+        </div>
+      </div>
+
+      <!-- mobile toggle -->
+      <!-- <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Open menu">
+        <svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="0" width="22" height="2" rx="1" fill="currentColor"/><rect y="6" width="22" height="2" rx="1" fill="currentColor"/><rect y="12" width="22" height="2" rx="1" fill="currentColor"/></svg>
+      </button> -->
+
+      <nav id="mainNav" class="main-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#camps">Camps</a>
+        <a href="#projects">Creative</a>
+        <a href="#sports">Sports</a>
+        <a href="#news">News</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ABOUT (animated / creative layout) -->
+    <section id="about" class="about-section">
+      <div class="section-illustration" aria-hidden="true">
+        <!-- friendly laptop + sparkles illustration -->
+        <svg viewBox="0 0 240 160" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+          <g fill="none" stroke="#7aa2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.14">
+            <rect x="18" y="36" width="204" height="92" rx="8" />
+            <rect x="34" y="50" width="172" height="56" rx="6" fill="#ffffff" opacity="0.02"/>
+            <path d="M24 136h192" stroke="#6bffcf" opacity="0.08"/>
+            <circle cx="48" cy="62" r="3" fill="#ff6b6b" opacity="0.16"/>
+            <circle cx="68" cy="62" r="3" fill="#7aa2ff" opacity="0.16"/>
+            <path d="M120 44v-6M132 44v-4" stroke="#ffcf6b" opacity="0.14"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="about-inner">
+        <div class="about-card">
+          <h2>About</h2>
+          <p class="lead">
+            Hey there! I’m James Dillon Minto, but everyone calls me Dillon — and this is my world! I’m 13 years old and love mixing tech, sports, creativity and activism to make awesome things happen.
+          </p>
+          <p class="lead">
+            When I’m not coding a video game or creating GIFs, you’ll probably find me running track, playing soccer or coming up with new ideas to help my community. I’ve spent my summers learning cool stuff at ID Tech, Liberty Science Center, NYU and Montclair State University, exploring everything from science and coding to game design and teamwork.
+          </p>
+          <p class="lead">
+            I’ve also taken part in protests and community events because I believe kids can make a difference too. You might even see me in a newspaper article or two!
+          </p>
+          <p class="lead">
+            This site is all about what I love — learning new things, being creative and having fun while doing it. Thanks for stopping by and checking out my adventures! 🌟
+          </p>
+
+          <ul class="about-highlights" aria-hidden="false">
+            <li><strong>Camps:</strong> ID Tech, Liberty Science Center, NYU, Montclair State</li>
+            <li><strong>Interests:</strong> Video game programming, GIF art, environmental ideas</li>
+            <li><strong>Sports:</strong> Track & soccer — photos and videos included</li>
+            <li><strong>Activism:</strong> Protest photos & news article link</li>
+          </ul>
+
+          <div class="about-actions">
+            <a class="btn" href="#projects">See Creative Work</a>
+            <a class="btn ghost" href="#camps">Camps & Certificates</a>
+          </div>
+        </div>
+
+        <div class="about-media" aria-hidden="true">
+          <div class="floating-frame" id="mediaStack">
+            <img data-src="assets/IMG_3174.jpg" alt="Programming at Montclair State" class="stack-img s1">
+            <img data-src="assets/IMG_5070.jpg" alt="Soccer" class="stack-img s2">
+            <img data-src="assets/RenderedImage (1).jpg" alt="Camp Sign" class="stack-img s3">
+            <img data-src="assets/IMG_7813-scaled.webp" alt="Eclipse at Liberty State Park (April 2024)" class="stack-img s4">
+          </div>
+          <canvas id="aboutParticles"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAMPS -->
+    <section id="camps" class="site-section">
+      <div class="section-illustration" aria-hidden="true">
+        <!-- graduation cap / atom -->
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+          <g opacity="0.12">
+            <path d="M12 64 L80 20 L148 64 L80 108 Z" fill="#ff6b6b"/>
+            <rect x="64" y="108" width="32" height="10" rx="2" fill="#7aa2ff"/>
+            <circle cx="28" cy="48" r="4" fill="#6bffcf"/>
+          </g>
+        </svg>
+      </div>
+
+      <h2>Camps</h2>
+      <p class="section-lead">Summer camps & certificates (ID Tech, Liberty Science Center, NYU, Montclair State).</p>
+      <div class="card-grid" data-section="camps"></div>
+    </section>
+
+    <!-- CREATIVE / PROJECTS -->
+    <section id="projects" class="site-section">
+      <div class="section-illustration" aria-hidden="true">
+        <!-- pixel art / paint -->
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+          <g opacity="0.12">
+            <rect x="20" y="28" width="120" height="90" rx="10" fill="#7aa2ff"/>
+            <circle cx="44" cy="52" r="6" fill="#ff6b6b"/>
+            <rect x="88" y="64" width="22" height="22" rx="3" fill="#6bffcf"/>
+          </g>
+        </svg>
+      </div>
+
+      <h2>Creative Work</h2>
+      <p class="section-lead">GIFs, game programming screenshots and creative posters.</p>
+      <div class="card-grid" data-section="projects"></div>
+    </section>
+
+    <!-- SPORTS -->
+    <section id="sports" class="site-section">
+      <div class="section-illustration" aria-hidden="true">
+        <!-- soccer ball / track lines -->
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+          <g opacity="0.12">
+            <circle cx="80" cy="70" r="38" fill="#6bffcf"/>
+            <path d="M20 120 h120" stroke="#7aa2ff" stroke-width="3" stroke-linecap="round" />
+          </g>
+        </svg>
+      </div>
+
+      <h2>Sports</h2>
+      <p class="section-lead">Track & soccer photos and videos.</p>
+      <div class="card-grid" data-section="sports"></div>
+    </section>
+
+    <!-- NEWS / ACTIVISM -->
+    <section id="news" class="site-section">
+      <div class="section-illustration" aria-hidden="true">
+        <!-- megaphone / leaf (activism) -->
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+          <g opacity="0.12">
+            <path d="M22 64 h70 l18 -22 v64 l-18 -22 h-70 z" fill="#ffcf6b"/>
+            <circle cx="118" cy="102" r="8" fill="#7aa2ff"/>
+            <path d="M132 42c6 6 8 14 6 20" stroke="#6bffcf" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+
+      <h2>News & Activism</h2>
+      <p class="section-lead">Protest photos, article link, and community events. Please Click on read article to study entire News Article</p>
+      <div class="card-grid" data-section="news"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 James "Dillon" Minto. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+  <!-- Media Modal (zoom to ~50% of screen) -->
+  <div id="mediaModal" class="media-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="media-modal-backdrop" data-close="true"></div>
+    <div class="media-modal-shell" role="document">
+      <button class="media-modal-close" aria-label="Close media (Esc)">✕</button>
+      <div class="media-modal-content" id="mediaModalContent" aria-live="polite"></div>
+    </div>
+  </div>
+</body>
+</html>

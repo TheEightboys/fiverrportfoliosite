@@ -1,0 +1,39 @@
+{
+  "projects": [
+    {
+      "title": "Science Fair Project",
+      "description": "Developed an innovative water filtration system using natural materials.",
+      "date": "March 2023",
+      "image": "images/science-fair-project.jpg",
+      "link": "https://example.com/science-fair-project"
+    },
+    {
+      "title": "Art Exhibition",
+      "description": "Showcased a series of paintings inspired by nature and wildlife.",
+      "date": "April 2023",
+      "image": "images/art-exhibition.jpg",
+      "link": "https://example.com/art-exhibition"
+    },
+    {
+      "title": "Coding Club Website",
+      "description": "Created a website for the school's coding club to share resources and projects.",
+      "date": "January 2023",
+      "image": "images/coding-club-website.jpg",
+      "link": "https://example.com/coding-club-website"
+    },
+    {
+      "title": "Community Service Project",
+      "description": "Organized a community clean-up event to promote environmental awareness.",
+      "date": "February 2023",
+      "image": "images/community-service.jpg",
+      "link": "https://example.com/community-service-project"
+    },
+    {
+      "title": "Robotics Competition",
+      "description": "Participated in a regional robotics competition, winning 2nd place.",
+      "date": "May 2023",
+      "image": "images/robotics-competition.jpg",
+      "link": "https://example.com/robotics-competition"
+    }
+  ]
+}

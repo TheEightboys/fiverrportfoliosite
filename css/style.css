@@ -1,0 +1,1041 @@
+:root{
+  /* Spotify-inspired theme */
+  --bg: #121212;            /* main page background (very dark) */
+  --surface: #181818;       /* section / panel surface */
+  --card: #1f1f1f;          /* card background */
+  --accent1: #1DB954;       /* Spotify green primary */
+  --accent2: #1ed760;       /* lighter green for gradients/highlights */
+  --accent3: #5bd67a;       /* secondary green */
+  --text: #FFFFFF;          /* primary text */
+  --muted: #B3B3B3;         /* muted text / captions */
+  --glass: rgba(255,255,255,0.03);
+}
+
+/* base page */
+html,body{
+  height:100%;
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(180deg,var(--bg) 0%, #0f0f0f 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* update key UI pieces to use spotify colors */
+.site-header,
+.site-section,
+.about-section,
+.card{
+  background-color: transparent; /* keep earlier glass styles but surfaces use variables below */
+}
+
+/* surfaces */
+.header-inner,
+.about-card,
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* logo badge */
+.logo-badge{
+  width:64px;
+  height:64px;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  background:transparent; /* remove previous gradient */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.logo-badge img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:translateZ(0);
+}
+
+/* buttons / CTA */
+.cta-btn,
+.btn{
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  color: #04130b;
+  box-shadow: 0 10px 30px rgba(29,185,84,0.12);
+}
+.btn.ghost{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--text);
+}
+
+/* accent ring for cards */
+.card::before{
+  background: linear-gradient(120deg, rgba(29,185,84,0.12), rgba(29,215,112,0.08), rgba(86,200,130,0.06));
+}
+
+/* badges and small accents */
+.card-badge{
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  color: var(--text);
+}
+
+/* text colors */
+.card-title,
+.about-card h2,
+.site-section h2{
+  color: var(--text);
+}
+.card-caption,
+.section-lead,
+.subtitle{
+  color: var(--muted);
+}
+
+/* modal close button tint */
+.media-modal-close{
+  background: linear-gradient(180deg, #f6fff6, #eafdeb);
+  color: #062113;
+}
+
+/* subtle focus outline using accent */
+.media-modal-close:focus,
+a:focus,
+button:focus{
+  outline: 3px solid rgba(29,185,84,0.18);
+  outline-offset: 3px;
+}
+
+/* small tweak: make SVG illustrations use a green tint */
+.section-illustration svg g{ fill: var(--accent1); stroke: var(--accent2); }
+
+/* ensure cards / carousels still readable on dark bg */
+.card-media{
+  background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06));
+}
+
+/* reduced-contrast fallback for accessibility */
+@media (prefers-contrast: more){
+  :root{ --muted:#d0d0d0; }
+}
+
+/* HEADER */
+.site-header{
+  position: relative;
+  overflow: visible;
+  padding: 28px 36px;
+
+  /* animated GIF background (saved as assets/header-bg.gif) */
+  background-image: url("../assets/header-bg.gif");
+  background-size: cover;
+  /* move image upward: 50% (center) horizontally, 18% from the top vertically */
+  background-position: 50% 18%;
+  background-repeat: no-repeat;
+  background-color: #081122; /* fallback */
+  isolation: isolate; /* keep overlay blending isolated */
+  color: var(--text);
+}
+
+/* overlay to darken the GIF and improve legibility */
+.site-header::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  /* adjust opacity stops to taste */
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.68) 0%,
+    rgba(0,0,0,0.50) 40%,
+    rgba(0,0,0,0.28) 70%,
+    rgba(0,0,0,0.08) 100%
+  );
+}
+
+/* ensure header content sits above overlay */
+.header-inner{
+  position: relative;
+  z-index: 10;
+}
+
+/* reduced-motion fallback: use a static poster image */
+@media (prefers-reduced-motion: reduce){
+  .site-header{
+    background-image: url("../assets/header-bg-poster.jpg");
+  }
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  gap:20px;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+  z-index:10; /* above blobs */
+}
+
+/* Brand */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo-badge{
+  width:64px;
+  height:64px;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  background:transparent; /* remove previous gradient */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.brand-text h1{
+  margin:0;
+  font-size:18px;
+  letter-spacing:0.4px;
+}
+.subtitle{
+  margin:2px 0 0 0;
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* Nav - horizontal flex */
+.main-nav{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+.main-nav a{
+  color:var(--text);
+  text-decoration:none;
+  font-weight:600;
+  padding:8px 12px;
+  border-radius:10px;
+  transition:all .18s ease;
+  backdrop-filter: blur(6px);
+}
+.main-nav a:hover{
+  transform:translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+/* CTA */
+.cta-btn{
+  background:linear-gradient(90deg,var(--accent2),var(--accent3));
+  color:#04202a;
+  border:none;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow: 0 8px 20px rgba(107,255,207,0.12), 0 2px 6px rgba(0,0,0,0.4);
+  transition:transform .14s ease, box-shadow .14s ease;
+}
+.cta-btn:active{ transform:translateY(2px) }
+
+/* Blob container (animated colorful blur shapes behind header) */
+.header-blobs{
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:160px;
+  pointer-events:none;
+  overflow:visible;
+  z-index:2;
+}
+.header-blobs .blob{
+  position:absolute;
+  border-radius:50%;
+  filter: blur(36px);
+  mix-blend-mode:screen;
+  opacity:.95;
+  transform-origin:center;
+  will-change:transform, opacity;
+  animation: float 9s ease-in-out infinite;
+}
+
+/* three preset blobs */
+.header-blobs .blob.b1{
+  width:360px;
+  height:360px;
+  left:-80px;
+  top:-80px;
+  background: radial-gradient(circle at 20% 30%, rgba(255,107,107,0.95) 0%, rgba(255,107,107,0.45) 30%, transparent 70%), radial-gradient(circle at 80% 70%, rgba(122,162,255,0.8) 0%, transparent 60%);
+  animation-duration:10s;
+  animation-delay:0s;
+}
+.header-blobs .blob.b2{
+  width:260px;
+  height:260px;
+  right:60px;
+  top:-40px;
+  background: radial-gradient(circle at 30% 30%, rgba(107,255,207,0.95) 0%, rgba(107,255,207,0.45) 35%, transparent 70%), radial-gradient(circle at 70% 70%, rgba(122,162,255,0.5) 0%, transparent 60%);
+  animation-duration:12s;
+  animation-delay:1.5s;
+}
+.header-blobs .blob.b3{
+  width:180px;
+  height:180px;
+  left:220px;
+  top:-40px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,203,107,0.95) 0%, rgba(255,203,107,0.45) 40%, transparent 70%);
+  animation-duration:8s;
+  animation-delay:.7s;
+  opacity:0.9;
+}
+
+/* small animated shimmer overlay for fun */
+.header-inner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:9;
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+  pointer-events:none;
+}
+
+/* keyframes */
+@keyframes float {
+  0%{ transform: translate3d(0,0,0) scale(1) rotate(0deg) }
+  25%{ transform: translate3d(12px,-8px,0) scale(1.04) rotate(6deg) }
+  50%{ transform: translate3d(-10px,6px,0) scale(.98) rotate(-3deg) }
+  75%{ transform: translate3d(8px,-6px,0) scale(1.03) rotate(2deg) }
+  100%{ transform: translate3d(0,0,0) scale(1) rotate(0deg) }
+}
+
+/* ABOUT SECTION STYLES (added) */
+.about-section{
+  position: relative;
+  padding: 56px 24px;
+  overflow: visible;
+
+  /* background image (attached) */
+  background-image: url("../assets/I.jpg");
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-color: #081122; /* fallback color */
+  border-top: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(3px) saturate(1.02);
+}
+.about-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  gap:28px;
+  align-items:stretch;
+  position:relative;
+}
+.about-card{
+  flex:1.1;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px;
+  padding:22px 24px;
+  box-shadow: 0 8px 30px rgba(2,6,12,0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.03);
+  color:var(--text);
+}
+.about-card h2{
+  margin:0 0 8px 0;
+  font-size:20px;
+  letter-spacing:0.6px;
+}
+.lead{
+  margin:10px 0;
+  color:var(--text);
+  line-height:1.4;
+  opacity:0.95;
+  font-size:15px;
+}
+
+/* highlights */
+.about-highlights{
+  margin:14px 0 18px 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:8px;
+}
+.about-highlights li{
+  background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  padding:8px 10px;
+  border-radius:10px;
+  font-size:13px;
+  color:var(--muted);
+  border:1px solid rgba(255,255,255,0.02);
+}
+
+/* actions */
+.about-actions{ display:flex; gap:10px; margin-top:8px; }
+.btn{
+  display:inline-block;
+  padding:10px 14px;
+  background:linear-gradient(90deg,var(--accent2),var(--accent3));
+  color:#04202a;
+  font-weight:700;
+  border-radius:12px;
+  text-decoration:none;
+  box-shadow: 0 8px 20px rgba(107,255,207,0.08);
+}
+.btn.ghost{
+  background:transparent;
+  color:var(--text);
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow:none;
+}
+
+/* media stack and canvas */
+.about-media{
+  flex:0.9;
+  min-width:300px;
+  max-width:420px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.floating-frame{
+  width:340px;
+  height:220px;
+  position:relative;
+  border-radius:16px;
+  overflow:visible;
+  transform-style:preserve-3d;
+  perspective:900px;
+}
+.stack-img{
+  position:absolute;
+  width:220px;
+  height:140px;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow: 0 14px 34px rgba(2,6,12,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), opacity .25s ease;
+  opacity:0;
+}
+
+/* stack positions - layered */
+.stack-img.s1{ left:8px; top:30px; transform: rotate(-6deg) translateZ(0); z-index:4; }
+.stack-img.s2{ right:6px; top:0px; transform: rotate(6deg) translateZ(0); z-index:3; width:200px; height:130px; }
+.stack-img.s3{ left:40px; bottom:6px; transform: rotate(-2deg) translateZ(0); z-index:2; width:190px; height:120px; }
+.stack-img.s4{ right:28px; bottom:18px; transform: rotate(8deg) translateZ(0); z-index:1; width:170px; height:110px; }
+
+/* visible state when loaded */
+.stack-img.visible{ opacity:1; transform: translateZ(12px) scale(1.03); }
+
+/* canvas sits behind images */
+#aboutParticles{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+  border-radius:16px;
+  mix-blend-mode:screen;
+}
+
+/* subtle floating animation for about-card */
+@keyframes wiggle {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-6px) }
+  100% { transform: translateY(0) }
+}
+.about-card{ animation: wiggle 8s ease-in-out infinite; }
+
+/* GRID CARDS (used across Camps / Projects / Sports / News) */
+.card-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:18px;
+  margin-top:18px;
+}
+
+/* card base */
+.card{
+  position:relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px;
+  overflow:visible;
+  padding:12px;
+  box-shadow: 0 10px 30px rgba(2,6,12,0.55);
+  transition: transform .32s cubic-bezier(.16,.8,.24,1), box-shadow .32s ease, filter .32s ease;
+  transform: translateY(16px);
+  opacity:0;
+  will-change:transform, opacity;
+  border:1px solid rgba(255,255,255,0.03);
+  cursor:default;
+  perspective:1000px;
+}
+
+/* animated gradient border ring */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:16px;
+  background: linear-gradient(120deg, rgba(255,107,107,0.12), rgba(107,255,207,0.12), rgba(122,162,255,0.12));
+  z-index:0;
+  filter: blur(12px);
+  opacity:0;
+  transition:opacity .28s ease;
+  pointer-events:none;
+}
+.card.inview{ transform: translateY(0); opacity:1; }
+.card.inview::before{ opacity:1; animation: borderShift 6s linear infinite; }
+
+@keyframes borderShift {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+
+/* media container */
+.card-media{
+  position:relative;
+  height:140px;
+  border-radius:10px;
+  overflow:hidden;
+  z-index:2;
+  transform-style:preserve-3d;
+  background:linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.card-media img,
+.card-media video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform: translateZ(0);
+  transition: transform .45s cubic-bezier(.22,.9,.35,1);
+  backface-visibility:hidden;
+}
+
+/* meta area */
+.card-meta{
+  padding:10px 6px 0 6px;
+  z-index:3;
+}
+.card-title{
+  margin:0;
+  font-size:15px;
+  font-weight:700;
+  color:var(--text);
+}
+.card-caption{
+  margin:6px 0 0 0;
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.2;
+}
+
+/* hover / focus interactions */
+.card:hover{
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 48px rgba(2,6,12,0.7);
+  filter: saturate(1.06);
+}
+.card:hover .card-media img,
+.card:hover .card-media video{
+  transform: scale(1.06) translateZ(6px);
+}
+
+/* small tilt effect shadow */
+.card-tilt{
+  transform-style:preserve-3d;
+  transition: transform .18s ease-out;
+}
+
+/* tag / badge */
+.card-badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  font-size:11px;
+  padding:6px 8px;
+  border-radius:8px;
+  z-index:4;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  color:var(--text);
+  font-weight:700;
+}
+
+/* card inner sliding motion */
+.card-inner{
+  will-change: transform;
+  animation-name: slideX;
+  animation-duration: 18s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transition: transform .18s ease-out;
+  /* let JS randomize duration per-card if desired by setting style.animationDuration */
+}
+
+/* pause auto slide when user interacts */
+.card.user-interact .card-inner,
+.card:focus-within .card-inner{
+  animation-play-state: paused !important;
+}
+
+/* gentle keyframes for left-right movement */
+@keyframes slideX {
+  from { transform: translateX(-20px); }
+  to   { transform: translateX(20px); }
+}
+
+/* ensure existing hover transform still works — inner translateX composes with outer card transforms */
+.card.inview{ transform: translateY(0); opacity:1; }
+
+/* reveal stagger */
+.card[data-order="1"]{ transition-delay: 0.06s; }
+.card[data-order="2"]{ transition-delay: 0.12s; }
+.card[data-order="3"]{ transition-delay: 0.18s; }
+.card[data-order="4"]{ transition-delay: 0.24s; }
+.card[data-order="5"]{ transition-delay: 0.30s; }
+.card[data-order="6"]{ transition-delay: 0.36s; }
+
+/* Revamped section backgrounds + accents for a brighter, energetic feel */
+
+/* base for all content sections */
+.site-section,
+.about-section {
+  position: relative;
+  padding: 56px 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  border-top: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(4px) saturate(1.02);
+  overflow: visible;
+}
+
+/* Remove animated blobs/gradient washes — ensure no ::before / ::after moving backgrounds are used */
+/* (If earlier CSS added .site-section::before / ::after, remove or comment them out) */
+
+/* illustrations container (static, decorative) */
+.section-illustration{
+  position: absolute;
+  right: 28px;
+  top: 18px;
+  width: 140px;
+  height: 140px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.12;            /* low-contrast decorative */
+  transform: translateZ(0);
+  filter: saturate(0.98) contrast(0.95);
+}
+
+/* ensure section content sits above illustrations */
+.site-section > h2,
+.site-section > .section-lead,
+.about-inner,
+.card-grid {
+  position: relative;
+  z-index: 2;
+}
+
+/* responsive: move illustration below header on small screens */
+@media (max-width: 900px){
+  .section-illustration{
+    display:block;
+    position: absolute;
+    left: 14px;
+    top: 8px;
+    width: 96px;
+    height: 96px;
+    opacity: 0.10;
+  }
+  .site-section{ padding: 42px 14px; }
+}
+
+/* small screens: hide illustrations if they clutter */
+@media (max-width: 520px){
+  .section-illustration{ display:none; }
+}
+
+/* ABOUT section background image + dark overlay for readability */
+.about-section{
+  position: relative;
+  padding: 56px 24px;
+  overflow: visible;
+
+  /* background image (attached) */
+  background-image: url("../assets/RenderedImage.jpg");
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-color: #081122; /* fallback color */
+  border-top: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(3px) saturate(1.02);
+}
+
+/* dark overlay above image but under content */
+.about-section::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* darker on the right to keep text readable over the subject */
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.72) 0%,
+    rgba(0,0,0,0.56) 35%,
+    rgba(0,0,0,0.28) 65%,
+    rgba(0,0,0,0.12) 100%
+  );
+  pointer-events: none;
+}
+
+/* make sure section content sits above the overlay */
+.about-inner,
+.about-card,
+.about-section h2,
+.about-section .section-lead {
+  position: relative;
+  z-index: 2;
+}
+
+/* smaller screens: center image and soften overlay */
+@media (max-width: 900px){
+  .about-section{
+    background-position: center;
+  }
+  .about-section::after{
+    background: linear-gradient(180deg, rgba(0,0,0,0.62), rgba(0,0,0,0.18));
+  }
+}
+
+/* Media modal (zoom to ~50% of screen) */
+.media-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.media-modal[data-open="true"]{
+  display: flex;
+  pointer-events: auto;
+}
+.media-modal[data-loading="true"] .media-modal-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--surface), var(--card));
+  z-index: 1;
+  opacity: 0.8;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.8; }
+}
+
+/* dim background */
+.media-modal-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+}
+
+/* shell that holds content */
+.media-modal-shell{
+  position: relative;
+  z-index: 2;
+  max-width: 50vw;    /* approx 50% of screen width */
+  max-height: 50vh;   /* approx 50% of screen height */
+  width: min(90vw, 900px);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: visible;
+  transform-origin: center center;
+  animation: modalPop .26s cubic-bezier(.2,.9,.3,1);
+}
+
+/* content area */
+.media-modal-content{
+  width: 100%;
+  height: 100%;
+  max-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));
+}
+
+/* media inside modal - image or video fit within available space */
+.media-modal-content img,
+.media-modal-content video{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(2,6,12,0.6);
+}
+
+/* close button (top-right of shell) */
+.media-modal-close{
+  position: absolute;
+  right: -12px;
+  top: -12px;
+  z-index: 3;
+  background: linear-gradient(180deg,#fff,#f2f7ff);
+  color:#081022;
+  border: none;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  display:inline-grid;
+  place-items:center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* subtle pop animation */
+@keyframes modalPop {
+  0% { transform: scale(.92) translateY(6px); opacity: 0 }
+  100%{ transform: scale(1) translateY(0); opacity: 1 }
+}
+
+/* accessibility focus */
+.media-modal-close:focus { outline: 3px solid rgba(122,162,255,0.28); outline-offset: 3px; }
+
+/* small screens: make modal a bit larger relative to viewport */
+@media (max-width: 700px){
+  .media-modal-shell{ max-width: 90vw; max-height: 60vh; }
+  .media-modal-content{ max-height: 60vh; }
+}
+
+/* Carousel (Netflix-like) horizontal auto-scroll left→right and pause on hover */
+.card-grid { display:block; } /* ensure container is block for carousel wrap */
+
+.carousel{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 6px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%); /* soft fade edges */
+  mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+.carousel-track{
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+  width: max-content; /* will exceed container because we duplicate slides */
+  transform: translateX(0);
+  will-change: transform;
+}
+
+/* ensure cards line up horizontally inside carousel */
+.carousel-track .card{
+  flex: 0 0 260px;     /* card width inside carousel (adjust) */
+  margin: 0;
+  display: block;
+}
+
+/* make track animate continuously left→right by translating to +50% (duplicate content required) */
+.carousel-track.animate{
+  animation-name: scrollLTR;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+/* pause when user interacts */
+.carousel.paused .carousel-track.animate,
+.carousel-track.animate[paused]{
+  animation-play-state: paused !important;
+}
+
+/* keyframes: move track rightwards so items visually scroll left→right */
+@keyframes scrollLTR {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(50%); } /* move by half (we duplicate content) */
+}
+
+/* Carousel keyframes & direction classes for seamless loop
+   - scrollLeft: content moves left (items disappear left -> appear right)
+   - scrollRight: content moves right (items disappear right -> appear left)
+*/
+@keyframes scrollLeft {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollRight {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* the track will get either .left or .right + .animate applied by JS */
+.carousel-track.animate.left {
+  animation-name: scrollLeft;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+.carousel-track.animate.right {
+  animation-name: scrollRight;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+/* pause state */
+.carousel.paused .carousel-track.animate {
+  animation-play-state: paused !important;
+}
+
+/* Responsive header + about tweaks
+   - keep desktop layout/alignments
+   - on small screens hide the floating frame and particles for performance/readability
+   Add this near the end of your CSS (after existing rules).
+*/
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+  padding:18px 24px;
+}
+
+/* make sure logo scales nicely */
+.logo-badge{ width:64px; height:64px; min-width:64px; min-height:64px; }
+.logo-badge img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* tablet / mobile breakpoints */
+@media (max-width: 900px){
+
+  /* header */
+  .header-inner{ padding:12px 16px; }
+  .nav-toggle{ display:block; }           /* if not already visible */
+  .main-nav{ display:none; }              /* mobile menu uses toggle/show */
+
+  /* About: stack content, keep text readable */
+  .about-inner{
+    display:flex;
+    flex-direction:column-reverse;
+    gap:18px;
+    align-items:stretch;
+  }
+  .about-card{
+    width:100%;
+    min-width:0;
+  }
+  .about-media{
+    width:100%;
+    max-width:100%;
+    order:-1;
+    display:block;
+  }
+
+  /* REMOVE floating-frame visually on small screens */
+  .about-media .floating-frame,
+  #mediaStack{
+    display:none !important;
+    visibility:hidden !important;
+    height:0 !important;
+    width:0 !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+  }
+
+  /* hide/disable canvas particles to save CPU on mobile */
+  #aboutParticles{
+    display:none !important;
+    visibility:hidden !important;
+    width:0 !important;
+    height:0 !important;
+    pointer-events:none !important;
+  }
+
+  /* illustrations may clutter — hide optional SVG decorations */
+  .section-illustration{ display:none !important; }
+
+  /* shift about section a little left on mobile */
+  .about-section .about-inner {
+    margin-left: -20px !important;
+    width: calc(100% + 20px) !important;
+  }
+
+  /* keep glass/background removal for mobile */
+  .about-section {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-top: none !important;
+  }
+
+  .about-section::before,
+  .about-section::after {
+    display: none !important;
+    content: none !important;
+  }
+}
+
+/* extra small phones */
+@media (max-width: 520px){
+  .logo-badge{ width:52px; height:52px; }
+  .header-inner{ padding:10px 12px; }
+  .about-inner{ gap:12px; }
+}
+
+/* shift ABOUT section content 30px to the left (desktop/tablet) */
+.about-section .about-inner {
+  margin-left: -10px;
+  /* keep layout intact: allow children to wrap as before */
+  width: calc(100% + 30px);
+}
+
+/* undo shift on small screens so layout stays natural on phones */
+@media (max-width: 900px){
+  .about-section .about-inner {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* hide floating frame on desktop */
+@media (min-width: 901px) {
+  .about-media .floating-frame,
+  #mediaStack {
+    position: relative;
+    right: -30px; /* negative moves it visually right */
+    transform: translateZ(0);
+  }
+  /* adjust stacking so it doesn't overlap text */
+  .about-section .about-card { z-index: 2; position: relative; }
+}
