@@ -918,11 +918,45 @@ button:focus{
   animation-play-state: paused !important;
 }
 
-/* Responsive header + about tweaks
-   - keep desktop layout/alignments
-   - on small screens hide the floating frame and particles for performance/readability
-   Add this near the end of your CSS (after existing rules).
-*/
+/* Comprehensive Responsive Styles */
+
+/* Base responsive settings */
+:root {
+  --content-width-xl: 1200px;
+  --content-width-lg: 960px;
+  --content-width-md: 720px;
+  --content-width-sm: 540px;
+  --header-height-mobile: 60px;
+  --section-padding-mobile: 32px 16px;
+  --card-width-mobile: 280px;
+}
+
+/* Global responsive adjustments */
+@media (max-width: 1200px) {
+  .header-inner,
+  .about-inner,
+  .site-section {
+    max-width: var(--content-width-lg);
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 960px) {
+  .header-inner,
+  .about-inner,
+  .site-section {
+    max-width: var(--content-width-md);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  /* Adjust card grid for better tablet layout */
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+}
 .header-inner{
   display:flex;
   align-items:center;
@@ -936,8 +970,138 @@ button:focus{
 .logo-badge{ width:64px; height:64px; min-width:64px; min-height:64px; }
 .logo-badge img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-/* tablet / mobile breakpoints */
-@media (max-width: 900px){
+/* Mobile Navigation */
+.nav-toggle {
+  display: none;
+  border: none;
+  background: var(--surface);
+  color: var(--text);
+  padding: 12px;
+  cursor: pointer;
+  z-index: 1001;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.nav-toggle svg {
+  width: 24px;
+  height: 18px;
+  display: block;
+  stroke-width: 2px;
+}
+
+.nav-toggle:hover {
+  background: var(--card);
+}
+
+.nav-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Fixed header for mobile */
+@media (max-width: 900px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+}
+
+/* Responsive Navigation */
+@media (max-width: 900px) {
+  /* Show mobile toggle */
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 16px;
+    top: 16px;
+    width: 44px;
+    height: 44px;
+    background: var(--surface);
+    border-radius: 8px;
+    z-index: 1001;
+  }
+
+  /* Mobile menu styles */
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    z-index: 1000;
+    padding: 60px 20px 20px;
+  }
+
+  .main-nav.active {
+    display: flex;
+  }
+
+  .main-nav.active {
+    opacity: 1;
+    pointer-events: auto;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .main-nav a {
+    font-size: 20px;
+    padding: 16px 32px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 12px;
+    background: var(--surface);
+    margin: 4px 0;
+  }
+
+  .main-nav a:hover {
+    background: var(--card);
+    transform: translateY(-2px);
+  }
+
+  @keyframes slideIn {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .main-nav a:nth-child(1) { animation-delay: 0.1s; }
+  .main-nav a:nth-child(2) { animation-delay: 0.2s; }
+  .main-nav a:nth-child(3) { animation-delay: 0.3s; }
+  .main-nav a:nth-child(4) { animation-delay: 0.4s; }
+  .main-nav a:nth-child(5) { animation-delay: 0.5s; }
+
+  /* Improved mobile header */
+  .header-inner {
+    height: var(--header-height-mobile);
+  }
+
+  /* Responsive brand */
+  .brand {
+    gap: 12px;
+  }
+
+  .brand-text h1 {
+    font-size: 16px;
+  }
+}
+
+/* Tablet breakpoint */
+@media (max-width: 900px) {
 
   /* header */
   .header-inner{ padding:12px 16px; }
@@ -1006,8 +1170,65 @@ button:focus{
   }
 }
 
-/* extra small phones */
-@media (max-width: 520px){
+/* Mobile Optimizations */
+@media (max-width: 520px) {
+  /* Core spacing adjustments */
+  :root {
+    --section-padding-mobile: 24px 16px;
+  }
+
+  /* Improved mobile typography */
+  .site-section h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  
+  .section-lead {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Better card layout for mobile */
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 16px -16px;
+    padding: 0 16px;
+  }
+
+  .card {
+    min-height: unset;
+    margin: 0;
+  }
+
+  .card-media {
+    height: 180px;
+  }
+
+  /* Optimize buttons for touch */
+  .btn,
+  .cta-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Stack button groups vertically */
+  .about-actions {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .about-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Extra small phone adjustments */
   .logo-badge{ width:52px; height:52px; }
   .header-inner{ padding:10px 12px; }
   .about-inner{ gap:12px; }

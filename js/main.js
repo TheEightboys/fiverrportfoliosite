@@ -579,28 +579,52 @@
   });
 })();
 
-/* --- mobile nav toggle --- */
+/* --- Mobile Navigation --- */
+/* --- Mobile Navigation --- */
 (function(){
-  const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
-  if(!toggle || !nav) return;
+  const toggle = document.getElementById('navToggle');
+  
+  if(!nav || !toggle) return;
 
-  toggle.addEventListener('click', () => {
-    const open = nav.classList.toggle('show');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  // Toggle mobile menu function
+  function toggleMobileMenu(e) {
+    if(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const isOpen = nav.classList.toggle('active');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  // Single click event listener for toggle button
+  toggle.addEventListener('click', toggleMobileMenu);
+
+  // Handle nav item clicks (close menu when clicking a link)
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
   });
 
-  // close nav when clicking outside or pressing Escape
+  // Close nav when clicking outside
   document.addEventListener('click', (e) => {
-    if(!nav.classList.contains('show')) return;
+    if(!nav.classList.contains('active')) return;
     if(e.target === nav || nav.contains(e.target) || e.target === toggle) return;
-    nav.classList.remove('show');
+    nav.classList.remove('active');
     toggle.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
   });
+
+  // Close nav on Escape key
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && nav.classList.contains('show')){
-      nav.classList.remove('show');
+    if(e.key === 'Escape' && nav.classList.contains('active')){
+      nav.classList.remove('active');
       toggle.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
     }
   });
 })();
